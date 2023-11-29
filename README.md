@@ -1,9 +1,6 @@
-# This is a small project with vite + bootstrap
+# This is a small project with vite + bootstrap where I work with uncontrolled forms
 
-# Este es un proyecto pequeño con vite + bootstrap
-
-
-
+# Este es un proyecto pequeño con vite + bootstrap en el que trabajo con formularios no controlados.
 
 
 
