@@ -2,7 +2,7 @@ import {useState} from "react"
 
 function Controlled (){
 
-    const [todo, setTodo] = useState({
+    const [todo, setTodo] = useState({ //Complex useState with an object
         title: '',
         description: '',
         state: 'pendiente'
@@ -24,7 +24,7 @@ function Controlled (){
                 className="form-control mb-2"
                 name="title"
                 value={todo.title}
-                onChange={(e)=> setTodo({...todo, title: e.target.value})}
+                onChange={(e)=> setTodo({...todo, title: e.target.value})} //spread operator and setting the value with e.target.value
             />
             <textarea 
                 className="form-control mb-2" 
