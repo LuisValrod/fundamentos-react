@@ -1,6 +1,6 @@
-# This is a small project with vite + bootstrap where I work with uncontrolled forms
+# This is a small project with vite + bootstrap where I work with uncontrolled forms and with controlled forms in different files
 
-# Este es un proyecto pequeño con vite + bootstrap en el que trabajo con formularios no controlados.
+# Este es un proyecto pequeño con vite + bootstrap en el que trabajo con formularios no controlados y formularios controlados en archivos distintos.
 
 
 

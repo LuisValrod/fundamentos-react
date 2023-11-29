@@ -1,10 +1,10 @@
-import NoControlado from "./NoControlado"
+import Uncontrolled from "./Uncontrolled"
 function App() {
 
   return (
     <div className="container">
   <h1 >Formulario</h1>
-  <NoControlado />
+  <Uncontrolled />
   </div>
   )
   }
