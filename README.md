@@ -1,3 +1,14 @@
+# This is a small project with vite + bootstrap
+
+# Este es un proyecto pequeño con vite + bootstrap
+
+
+
+
+
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
