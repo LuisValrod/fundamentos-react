@@ -1,10 +1,10 @@
 import {useState} from "react"
 
-function Controlled (){
-
+function Formulario (){
+    const [error, setError] = useState('')
     const [todo, setTodo] = useState({ //Complex useState with an object
-        title: '',
-        description: '',
+        title: 'Todo #01',
+        description: 'Description #01',
         state: 'pendiente',
         priority: true
 
@@ -14,12 +14,20 @@ function Controlled (){
 
     function handleSubmit (e) {  
         e.preventDefault()  //prevent default behaviour
+        setError('') // clean previous error if exist
+
+        if(!title.trim() || !description.trim() || !state.trim()){ // prevent the user enter empy spaces
+            return(setError('Fill in the required fields'))
+        }
+        
         console.log(todo)
+        setTodo({...todo, title:'', description: ''}) // On submit, we clear fields
+
     }
 
     function handleChange(e){
         const {value, name, checked} = e.target
-        console.log(name)
+        console.log(value)
         //e => setTodo({...todo, priority: e.target.checked})
         setTodo({
             ...todo, 
@@ -66,10 +74,11 @@ function Controlled (){
                     <option value="completado">Completado</option>
             </select>
             <button className="btn btn-primary" type="Submit">Procesar</button>
+            {error !== '' && error}
  
         </form>
     )
 }
 
 
-export default Controlled
+export default Formulario

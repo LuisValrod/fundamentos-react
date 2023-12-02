@@ -7,3 +7,8 @@ function Cat() {
                     weight: 15
     })
 }
+
+
+//This file is just for practising purposes
+
+export default Cat
