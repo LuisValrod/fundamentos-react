@@ -1,11 +1,11 @@
 import {useState} from "react"
+import Swal from "sweetalert2"
 
-function Formulario (){
-    const [error, setError] = useState('')
+function Formulario ({addTodo}){
     const [todo, setTodo] = useState({ //Complex useState with an object
         title: 'Todo #01',
         description: 'Description #01',
-        state: 'pendiente',
+        state: 'pending',
         priority: true
 
     })
@@ -14,13 +14,32 @@ function Formulario (){
 
     function handleSubmit (e) {  
         e.preventDefault()  //prevent default behaviour
-        setError('') // clean previous error if exist
-
-        if(!title.trim() || !description.trim() || !state.trim()){ // prevent the user enter empy spaces
-            return(setError('Fill in the required fields'))
+    
+        if(!title.trim() || !description.trim()){ // prevent the user enter empy spaces
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Todo and description required",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+              return
         }
         
         console.log(todo)
+
+        addTodo({
+            id: Date.now(),
+            ...todo,
+            state: state === 'completed'
+        })
+
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+          });
         setTodo({...todo, title:'', description: ''}) // On submit, we clear fields
 
     }
@@ -40,7 +59,7 @@ function Formulario (){
         <form onSubmit={handleSubmit}>  
             <input 
                 type='text' 
-                placeholder="Ingrese Todo" 
+                placeholder="Add Todo" 
                 className="form-control mb-2"
                 name="title"
                 value={title}
@@ -48,7 +67,7 @@ function Formulario (){
             />
             <textarea 
                 className="form-control mb-2" 
-                placeholder="ingrese descripcion"
+                placeholder="Add description"
                 name="description"
                 value={description}
                 onChange={handleChange}
@@ -62,7 +81,7 @@ function Formulario (){
                 checked={priority}
                 onChange={handleChange}
                 />
-            <label htmlFor="inputCheck">Dar prioridad</label>
+            <label htmlFor="inputCheck">Give priority</label>
             </div>
             <select 
                 className="form-select mb-2" 
@@ -70,12 +89,10 @@ function Formulario (){
                 value={state}
                 onChange={handleChange}
             >
-                    <option value="pendiente">Pendiente</option>
-                    <option value="completado">Completado</option>
+                    <option value="pendiente">Pending</option>
+                    <option value="completado">Completed</option>
             </select>
-            <button className="btn btn-primary" type="Submit">Procesar</button>
-            {error !== '' && error}
- 
+            <button className="btn btn-primary" type="Submit">Add To do</button>
         </form>
     )
 }
