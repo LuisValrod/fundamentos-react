@@ -14,7 +14,7 @@ function Formulario ({addTodo}){
 
     function handleSubmit (e) {  
         e.preventDefault()  //prevent default behaviour
-    
+
         if(!title.trim() || !description.trim()){ // prevent the user enter empy spaces
             Swal.fire({
                 icon: "error",
@@ -89,8 +89,8 @@ function Formulario ({addTodo}){
                 value={state}
                 onChange={handleChange}
             >
-                    <option value="pendiente">Pending</option>
-                    <option value="completado">Completed</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
             </select>
             <button className="btn btn-primary" type="Submit">Add To do</button>
         </form>
