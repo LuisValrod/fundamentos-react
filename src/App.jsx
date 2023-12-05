@@ -1,43 +1,45 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Formulario from "./components/Formulario"
 import Todos from "./components/Todos"
 
-const initialStateTodos = [
-  {
-  id: 1, 
-  title: "Todo #01",
-  description: "Description #01",
-  state: true,
-  priority: true  
-},
-  {
-  id: 2, 
-  title: "Todo #02",
-  description: "Description #02",
-  state: false,
-  priority: false  
-},
-  {
-  id: 3, 
-  title: "Todo #03",
-  description: "Description #03",
-  state: false,
-  priority: false  
-},
-]
+const initialStateTodos = JSON.parse(localStorage.getItem('todos')) || [];
 function App() {
   
 const [todos, setTodos] = useState(initialStateTodos)
 
+useEffect(() => localStorage.setItem('todos', JSON.stringify(todos)), 
+[todos])
+
 const addTodo = todo => {
   setTodos([...todos, todo])
 }
+ const deleteTodo = id => {
+  const newArray = todos.filter(todo => todo.id !== id)
+  setTodos(newArray)
+ }
 
+ const updateTodo = id => {
+  const newArray = todos.map(todo =>{ //todo.id === id ? {...todo, state = !todo.state} : todo
+    if(todo.id === id){
+      todo.state = !todo.state
+    }
+    return todo
+   } )
+  setTodos(newArray)
+ }
+
+ const orderTodo = arrayTodos => {
+  return arrayTodos.sort((a, b) => {
+    if (a.priority === b.priority){return 0}
+    if(a.priority){return -1}
+    if(!a.priority){return 1}
+  })
+ }
   return (
     <div className="container mb-2">
   <h1 className="my-5">Todo List</h1>
   <Formulario addTodo={addTodo} />
-  <Todos todos={todos}/>
+  <Todos todos={orderTodo(todos)} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
   </div>
   )
   }
